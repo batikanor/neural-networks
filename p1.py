@@ -2,9 +2,9 @@
 
 
 # inputs = outputs from the previous layer
-inputs = [1.2, 5.1, 2.1]
-weights = [3.1, 2.1, 8.7]
-bias = 3
+inputs = [1, 2, 3]
+weights = [0.2, 0.8, -0.5]
+bias = 2
 
 # output of this layer
 output = inputs[0] * weights[0] + \
