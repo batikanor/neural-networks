@@ -13,8 +13,10 @@ biases = [
 
 layer_outputs = [] # output of current layer
 
+# traverse neurons
 for neuron_weights, neuron_bias in zip(weights, biases): # zip combines two lists elementwise. So zeroeth element of this would be a list with weights[0] and biases[0]
     neuron_output = 0 # output of given neuron
+    # traverse inputs
     for n_input, weight in zip(inputs, neuron_weights):
         neuron_output += n_input * weight
     neuron_output += neuron_bias
