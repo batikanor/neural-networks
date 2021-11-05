@@ -16,18 +16,19 @@
 # relu is demonstrated well on video linked to on top
 
 import numpy as np
-import nnfs
+from nnfs.datasets import spiral_data
+import nnfs   
 nnfs.init() # what this does is the following
-    #1. it sets up np.random.seed(0)
-    #2. dot product sometimes uses a different data type and there is no way to set a default data type in numpy
-        #2.1. so this overrides somethings to nsure that data types are the same as in the book (nnfs)
-    #3. The dataset generationgasdg
-# inputs = [0, 2, -1, 3.3, -2.7, 1.1, 2.2 -100]
-# output = []
-# # relu
-# for i in inputs:
-#     output.append(max(0,i))
-# print(output)
+#     #1. it sets up np.random.seed(0)
+#     #2. dot product sometimes uses a different data type and there is no way to set a default data type in numpy
+#         #2.1. so this overrides somethings to nsure that data types are the same as in the book (nnfs)
+#     #3. The dataset generationgasdg
+# # inputs = [0, 2, -1, 3.3, -2.7, 1.1, 2.2 -100]
+# # output = []
+# # # relu
+# # for i in inputs:
+# #     output.append(max(0,i))
+# # print(output)
 
 X = [
     [1, 2, 3, 2.5],
@@ -37,17 +38,16 @@ X = [
 
 # This function generates data for us, it just makes things easy for learning. it is also a part of the package nnfs
 # function below is a modified version of code in cs231 course
-# def create_data(points, classes):
-#     X  = np.zeros((points*classes, 2))
-#     y = np.zeros(points*classes, dtype='uint8')
-#     for class_number in range(classes):
-#         ix  = range(points*class_number, points*(class_number+1))
-#         r = np.linspace(0.0, 1, points) # radius
-#         t = np.linspace(class_number*4, (class_number+1)*4, points) + np.random.randn(points)*0.2
-#         X[ix] = np.c_[r*np.sin(t*2.5), r*np.cos(t*2.5)]
-#         y[ix] = class_number
-#     return X, y 
-
+def create_data(points, classes):
+    X  = np.zeros((points*classes, 2))
+    y = np.zeros(points*classes, dtype='uint8')
+    for class_number in range(classes):
+        ix  = range(points*class_number, points*(class_number+1))
+        r = np.linspace(0.0, 1, points) # radius
+        t = np.linspace(class_number*4, (class_number+1)*4, points) + np.random.randn(points)*0.2
+        X[ix] = np.c_[r*np.sin(t*2.5), r*np.cos(t*2.5)]
+        y[ix] = class_number
+    return X, y 
 
 
 class Layer_Dense: # dense layer
@@ -66,14 +66,21 @@ class Activation_ReLU:
     def forward(self, inputs):
         self.output = np.maximum(0, inputs)
 
-row, col = np.shape(X)
+
+
+X, y = create_data(100, 3)
+X, y = spiral_data(100, 3) # 100 feature sets, 3 classes
+row, col = np.shape(X) # col is 2
 n_neurons_1 = 5
 n_neurons_2 = 2
+print(col, n_neurons_1)
 layer1 = Layer_Dense(col, n_neurons_1)
-
+activation1 = Activation_ReLU()
 layer2 = Layer_Dense(n_neurons_1, n_neurons_2) 
 
+
 layer1.forward(X)
-print(layer1.output)
-layer2.forward(layer1.output)
-print(layer2.output)
+activation1.forward(layer1.output)
+print(activation1.output)
+layer2.forward(activation1.output)
+# print(layer2.output)
