@@ -9,18 +9,21 @@ layer_outputs = [4.8, 1.21, 2.385]
 
 
 E = math.e 
-exp_values = []
+import numpy as np
 
-for output in layer_outputs:
-    exp_values.append(E**output)
+exp_values = np.exp(layer_outputs) # typically numpy functions will by default impact every value
+
+# for output in layer_outputs:
+#     exp_values.append(E**output)
 # print(exp_values)
 
 # first we've exponentiated and then we'll normalize. Thats because we don't want to lose the meaning of any (neg.) value
 
-norm_base = sum(exp_values)
-norm_values = []
+# norm_base = sum(exp_values)
+norm_values = exp_values / np.sum(exp_values)
 
-for value in exp_values:
-    norm_values.append(value / norm_base)
-print(norm_values, sum(norm_values))
+# for value in exp_values:
+#     norm_values.append(value / norm_base)
+
+print(exp_values, norm_values, sum(norm_values))
 
