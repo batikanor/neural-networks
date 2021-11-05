@@ -9,6 +9,7 @@ layer_outputs = [
 ]
 
 
+
 exp_values = np.exp(layer_outputs) # typically numpy functions will by default impact every value
 # print(exp_values)
 # print(np.sum(layer_outputs)) # in default, just gives us a scalar value here. Which is not what we want obviously
