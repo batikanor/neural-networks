@@ -26,3 +26,8 @@ print()
 
 average_loss = np.mean(neg_log)
 print(neg_log, average_loss)
+
+# issue: negative log of 0 is infinite
+    # if confidence of coorrect class is 0, then it is already a funny thing.
+    # the problem is that if there is an inf (infinity) value in numpy .mean, it will just be infiniity
+        # solution: clip the values in the range by some insignificant amount
