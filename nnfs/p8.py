@@ -8,4 +8,9 @@ softmax_outputs = np.array([
 
 class_targets = [0, 1, 1] # from 0.7, 0.5 and 0.9 above
 
-print(softmax_outputs[[0,1,2], class_targets])
+# print(softmax_outputs[[0,1,2], class_targets])
+print(
+    softmax_outputs[
+        range(len(softmax_outputs)), class_targets
+    ]
+)
