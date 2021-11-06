@@ -15,8 +15,14 @@ print(
     ]
 )
 print()
-print(
-    -np.log(softmax_outputs[
-        range(len(softmax_outputs)), class_targets
-    ]
-))
+neg_log = -np.log(
+        softmax_outputs[
+            range(len(softmax_outputs)), class_targets
+        ]
+    )
+
+# loss of this batch -> mean of the losses
+print()
+
+average_loss = np.mean(neg_log)
+print(neg_log, average_loss)
