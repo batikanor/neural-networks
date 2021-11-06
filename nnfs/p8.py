@@ -14,3 +14,9 @@ print(
         range(len(softmax_outputs)), class_targets
     ]
 )
+print()
+print(
+    -np.log(softmax_outputs[
+        range(len(softmax_outputs)), class_targets
+    ]
+))
